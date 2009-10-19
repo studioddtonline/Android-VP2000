@@ -1,0 +1,40 @@
+From 7e8d773466a710463c3e678c2e8176bb22f4da68 Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <mirai.takahashi@gmail.com>
+Date: Fri, 25 Sep 2009 15:43:37 +0900
+Subject: [PATCH] ssl fix patched
+
+---
+ .../harmony/xnet/provider/jsse/SSLParameters.java  |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+
+diff --git a/libcore/x-net/src/main/java/org/apache/harmony/xnet/provider/jsse/SSLParameters.java b/libcore/x-net/src/main/java/org/apache/harmony/xnet/provider/jsse/SSLParameters.java
+index d91388a..6fd33a1 100644
+--- a/libcore/x-net/src/main/java/org/apache/harmony/xnet/provider/jsse/SSLParameters.java
++++ b/libcore/x-net/src/main/java/org/apache/harmony/xnet/provider/jsse/SSLParameters.java
+@@ -37,6 +37,9 @@ import javax.net.ssl.TrustManager;
+ import javax.net.ssl.TrustManagerFactory;
+ import javax.net.ssl.X509KeyManager;
+ import javax.net.ssl.X509TrustManager;
++import java.util.logging.Level;
++import java.util.logging.Logger;
++
+ 
+ /**
+  * The instances of this class incapsulate all the info
+@@ -452,6 +455,13 @@ public class SSLParameters implements Cloneable {
+      * TODO: Move this to a published API under dalvik.system.
+      */
+     public static X509TrustManager getDefaultTrustManager() {
++        if (defaultTrustManager == null) {
++            try {
++                 defaultParameters = new SSLParameters(null, null, null, null, null);
++            } catch (KeyManagementException e) {
++                 Logger.global.log(Level.SEVERE,"Can not create default Trust manager");
++            }
++        }
+         return defaultTrustManager;
+     }
+ }
+-- 
+1.6.0.4
+

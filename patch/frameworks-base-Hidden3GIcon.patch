@@ -1,0 +1,52 @@
+From 899569fd9cc290e16b160cb673155362fa4cf6b5 Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <mirai.takahashi@gmail.com>
+Date: Mon, 19 Oct 2009 09:44:13 +0900
+Subject: [PATCH] 3G Icon hidden
+
+---
+ .../com/android/server/status/StatusBarPolicy.java |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/services/java/com/android/server/status/StatusBarPolicy.java b/services/java/com/android/server/status/StatusBarPolicy.java
+index a4b47b5..a3dfd4d 100644
+--- a/services/java/com/android/server/status/StatusBarPolicy.java
++++ b/services/java/com/android/server/status/StatusBarPolicy.java
+@@ -428,7 +428,7 @@ public class StatusBarPolicy {
+         mPhone = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+         mPhoneData = IconData.makeIcon("phone_signal",
+                 null, com.android.internal.R.drawable.stat_sys_signal_null, 0, 0);
+-        mPhoneIcon = service.addIcon(mPhoneData, null);
++//        mPhoneIcon = service.addIcon(mPhoneData, null);
+ 
+         // phone_evdo_signal
+         mPhoneEvdoData = IconData.makeIcon("phone_evdo_signal",
+@@ -899,7 +899,7 @@ public class StatusBarPolicy {
+             } else {
+                 mPhoneData.iconId = com.android.internal.R.drawable.stat_sys_signal_null;
+             }
+-            mService.updateIcon(mPhoneIcon, mPhoneData, null);
++//            mService.updateIcon(mPhoneIcon, mPhoneData, null);
+             mService.setIconVisibility(mPhoneEvdoIcon,false);
+             return;
+         }
+@@ -979,7 +979,7 @@ public class StatusBarPolicy {
+         }
+ 
+         mPhoneData.iconId = iconList[iconLevel];
+-        mService.updateIcon(mPhoneIcon, mPhoneData, null);
++//        mService.updateIcon(mPhoneIcon, mPhoneData, null);
+     }
+ 
+     private final void updateDataNetType() {
+@@ -1272,7 +1272,7 @@ public class StatusBarPolicy {
+                 break;
+ 
+         }
+-        mService.updateIcon(mPhoneIcon, mPhoneData, null);
++//        mService.updateIcon(mPhoneIcon, mPhoneData, null);
+     }
+ 
+ 
+-- 
+1.6.0.4
+

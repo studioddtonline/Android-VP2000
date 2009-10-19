@@ -1,0 +1,50 @@
+From 7ea4807616d974264fbaa1b70088fd36062c1d36 Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <mirai.takahashi@gmail.com>
+Date: Mon, 19 Oct 2009 10:12:01 +0900
+Subject: [PATCH] Battery Icon hidden, and DO NOT show low battery alarm.
+
+---
+ .../com/android/server/status/StatusBarPolicy.java |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/services/java/com/android/server/status/StatusBarPolicy.java b/services/java/com/android/server/status/StatusBarPolicy.java
+index a3dfd4d..dd6f451 100644
+--- a/services/java/com/android/server/status/StatusBarPolicy.java
++++ b/services/java/com/android/server/status/StatusBarPolicy.java
+@@ -422,7 +422,7 @@ public class StatusBarPolicy {
+         // battery
+         mBatteryData = IconData.makeIcon("battery",
+                 null, com.android.internal.R.drawable.stat_sys_battery_unknown, 0, 0);
+-        mBatteryIcon = service.addIcon(mBatteryData, null);
++//        mBatteryIcon = service.addIcon(mBatteryData, null);
+ 
+         // phone_signal
+         mPhone = (TelephonyManager)context.getSystemService(Context.TELEPHONY_SERVICE);
+@@ -580,7 +580,7 @@ public class StatusBarPolicy {
+     private final void updateBattery(Intent intent) {
+         mBatteryData.iconId = intent.getIntExtra("icon-small", 0);
+         mBatteryData.iconLevel = intent.getIntExtra("level", 0);
+-        mService.updateIcon(mBatteryIcon, mBatteryData, null);
++//        mService.updateIcon(mBatteryIcon, mBatteryData, null);
+ 
+         int plugged = intent.getIntExtra("plugged", 0);
+         int level = intent.getIntExtra("level", -1);
+@@ -620,6 +620,7 @@ public class StatusBarPolicy {
+             Log.d(TAG, "plugged=" + plugged + " oldPlugged=" + oldPlugged + " level=" + level
+                     + " mBatteryThreshold=" + mBatteryThreshold + " oldThreshold=" + oldThreshold);
+         }
++/*
+         if (plugged == 0
+                 && ((oldPlugged != 0 && level < mBatteryThresholds[BATTERY_THRESHOLD_WARNING])
+                     || (mBatteryThreshold > oldThreshold
+@@ -657,6 +658,7 @@ public class StatusBarPolicy {
+                 }
+             }
+         }
++*/
+     }
+ 
+     private void showBatteryView() {    
+-- 
+1.6.0.4
+

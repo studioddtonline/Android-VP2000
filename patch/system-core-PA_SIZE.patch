@@ -1,0 +1,25 @@
+From 4053f09801443e98718d222f91189d1bde8802ee Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <mirai.takahashi@gmail.com>
+Date: Thu, 24 Sep 2009 16:11:34 +0900
+Subject: [PATCH] revert changed PA_SIZE
+
+---
+ init/property_service.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/init/property_service.c b/init/property_service.c
+index 85ec1db..7bc6c71 100644
+--- a/init/property_service.c
++++ b/init/property_service.c
+@@ -126,7 +126,7 @@ out:
+ 
+ #define PA_COUNT_MAX  247
+ #define PA_INFO_START 1024
+-#define PA_SIZE  ((PA_INFO_START + sizeof(struct prop_info)*PA_COUNT_MAX) + PAGE_SIZE)
++#define PA_SIZE  32768
+ 
+ static workspace pa_workspace;
+ static prop_info *pa_info_array;
+-- 
+1.6.0.4
+

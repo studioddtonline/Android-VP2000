@@ -1,0 +1,38 @@
+From 81adc9b7b7519707406c29ca75a35840bd13058d Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <mirai.takahashi@gmail.com>
+Date: Mon, 19 Oct 2009 09:36:27 +0900
+Subject: [PATCH] Disable DIM and BLUR
+
+---
+ .../com/android/server/WindowManagerService.java   |    8 ++++----
+ 1 files changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/services/java/com/android/server/WindowManagerService.java b/services/java/com/android/server/WindowManagerService.java
+index 6cf0f68..357e524 100644
+--- a/services/java/com/android/server/WindowManagerService.java
++++ b/services/java/com/android/server/WindowManagerService.java
+@@ -8643,8 +8643,8 @@ public class WindowManagerService extends IWindowManager.Stub implements Watchdo
+                                     try {
+                                         mBlurSurface = new Surface(mFxSession, 0,
+                                                 -1, 16, 16,
+-                                                PixelFormat.OPAQUE,
+-                                                Surface.FX_SURFACE_BLUR);
++                                                PixelFormat.TRANSPARENT,
++                                                Surface.FX_SURFACE_NORMAL);
+                                     } catch (Exception e) {
+                                         Log.e(TAG, "Exception creating Blur surface", e);
+                                     }
+@@ -9285,8 +9285,8 @@ public class WindowManagerService extends IWindowManager.Stub implements Watchdo
+                 if (SHOW_TRANSACTIONS) Log.i(TAG, "  DIM "
+                         + mDimSurface + ": CREATE");
+                 try {
+-                    mDimSurface = new Surface(session, 0, -1, 16, 16, PixelFormat.OPAQUE,
+-                            Surface.FX_SURFACE_DIM);
++                    mDimSurface = new Surface(session, 0, -1, 16, 16, PixelFormat.TRANSPARENT,
++                            Surface.FX_SURFACE_NORMAL);
+                 } catch (Exception e) {
+                     Log.e(TAG, "Exception creating Dim surface", e);
+                 }
+-- 
+1.6.0.4
+
