@@ -1,0 +1,112 @@
+From 390da107ddb7f135b2d5d5a6c1a97477633d5dd7 Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <android@s13e.net>
+Date: Sun, 25 Oct 2009 11:56:16 +0900
+Subject: [PATCH] BatteryService for VP2000
+
+---
+ services/jni/com_android_server_BatteryService.cpp |   73 +++-----------------
+ 1 files changed, 11 insertions(+), 62 deletions(-)
+
+diff --git a/services/jni/com_android_server_BatteryService.cpp b/services/jni/com_android_server_BatteryService.cpp
+index f391ede..bb1da0f 100644
+--- a/services/jni/com_android_server_BatteryService.cpp
++++ b/services/jni/com_android_server_BatteryService.cpp
+@@ -72,49 +72,12 @@ static BatteryManagerConstants gConstants;
+ 
+ static jint getBatteryStatus(const char* status)
+ {
+-    switch (status[0]) {
+-        case 'C': return gConstants.statusCharging;         // Charging
+-        case 'D': return gConstants.statusDischarging;      // Discharging
+-        case 'F': return gConstants.statusFull;             // Not charging
+-        case 'N': return gConstants.statusNotCharging;      // Full
+-        case 'U': return gConstants.statusUnknown;          // Unknown
+-            
+-        default: {
+-            LOGW("Unknown battery status '%s'", status);
+-            return gConstants.statusUnknown;
+-        }
+-    }
++    return gConstants.statusFull;      // Allways Full
+ }
+ 
+ static jint getBatteryHealth(const char* status)
+ {
+-    switch (status[0]) {
+-        case 'D': return gConstants.healthDead;         // Dead
+-        case 'G': return gConstants.healthGood;         // Good
+-        case 'O': {
+-            if (strcmp(status, "Overheat") == 0) {
+-                return gConstants.healthOverheat;
+-            } else if (strcmp(status, "Over voltage") == 0) {
+-                return gConstants.healthOverVoltage;
+-            }
+-            LOGW("Unknown battery health[1] '%s'", status);
+-            return gConstants.healthUnknown;
+-        }
+-        
+-        case 'U': {
+-            if (strcmp(status, "Unspecified failure") == 0) {
+-                return gConstants.healthUnspecifiedFailure;
+-            } else if (strcmp(status, "Unknown") == 0) {
+-                return gConstants.healthUnknown;
+-            }
+-            // fall through
+-        }
+-            
+-        default: {
+-            LOGW("Unknown battery health[2] '%s'", status);
+-            return gConstants.healthUnknown;
+-        }
+-    }
++    return gConstants.healthGood;         // Allways Good
+ }
+ 
+ 
+@@ -131,34 +94,20 @@ static void android_server_BatteryService_update(JNIEnv* env, jobject obj)
+   }
+   gLock.unlock();
+ 
+-  env->SetBooleanField(obj,gFieldIds.mAcOnline,
+-                    gBss->is_ac_online()==1 ?true:false);
+-  env->SetBooleanField(obj,gFieldIds.mUsbOnline,
+-                    gBss->is_usb_online()==1 ?true:false);
+-  env->SetBooleanField(obj,gFieldIds.mBatteryPresent,
+-                    gBss->is_usb_online()==1 ?true:false);
++  env->SetBooleanField(obj,gFieldIds.mAcOnline, true);
++  env->SetBooleanField(obj,gFieldIds.mUsbOnline, false);
++  env->SetBooleanField(obj,gFieldIds.mBatteryPresent, true);
+ 
+ 
+-  env->SetIntField(obj,gFieldIds.mBatteryLevel,gBss->get_bat_level());
+-  env->SetIntField(obj,gFieldIds.mBatteryVoltage,gBss->get_bat_voltage());
+-  env->SetIntField(obj,gFieldIds.mBatteryTemperature,
+-                   gBss->get_bat_temperature());
++  env->SetIntField(obj,gFieldIds.mBatteryLevel, 0);
++  env->SetIntField(obj,gFieldIds.mBatteryVoltage, 0);
++  env->SetIntField(obj,gFieldIds.mBatteryTemperature, 0);
+     
+   const int SIZE = 128;
+   char buf[SIZE];
+-  if (gBss->get_bat_status(buf, SIZE) > 0)
+-      env->SetIntField(obj, gFieldIds.mBatteryStatus, getBatteryStatus(buf));
+-  else
+-      env->SetIntField(obj, gFieldIds.mBatteryStatus, 'U');
+-
+-  if (gBss->get_bat_health(buf,SIZE)>0)
+-      env->SetIntField(obj, gFieldIds.mBatteryHealth, getBatteryHealth(buf));
+-  else
+-      env->SetIntField(obj, gFieldIds.mBatteryHealth, 'U');
+-
+-  if (gBss->get_bat_tech(buf,SIZE)>0)
+-      env->SetObjectField(obj, gFieldIds.mBatteryTechnology, env->NewStringUTF(buf));
+-
++  env->SetIntField(obj, gFieldIds.mBatteryStatus, getBatteryStatus(buf));
++  env->SetIntField(obj, gFieldIds.mBatteryHealth, getBatteryHealth(buf));
++  env->SetObjectField(obj, gFieldIds.mBatteryTechnology, env->NewStringUTF("NO BATTERY"));
+ }
+ 
+ static JNINativeMethod sMethods[] = {
+-- 
+1.6.0.4
+
