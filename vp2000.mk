@@ -49,5 +49,5 @@ PRODUCT_PROPERTY_OVERRIDES += \
 ifeq ($(TARGET_PRODUCT),$(PRODUCT_NAME))
 TARGET_ARCH := x86
 DISABLE_DEXPREOPT := true
-CFLAGS := -march=geode -mtune=geode -mmmx -mno-sse -mfpmath=387
+CFLAGS := -march=geode -mtune=geode -mmmx -mno-sse -m3dnow -mfpmath=387 -funroll-loops -O2
 endif
