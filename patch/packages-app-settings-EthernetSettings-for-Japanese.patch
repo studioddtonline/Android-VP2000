@@ -1,0 +1,43 @@
+From d1e3987df79b4ce28664fcd52a2e4c4c0c4383a7 Mon Sep 17 00:00:00 2001
+From: Mirai Takahashi <mirai.takahashi@gmail.com>
+Date: Mon, 26 Oct 2009 11:28:07 +0900
+Subject: [PATCH] Japanese Transration for Ethernet Settings
+
+---
+ res/values-ja/strings.xml |   22 ++++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
+
+diff --git a/res/values-ja/strings.xml b/res/values-ja/strings.xml
+index 1baf6bc..d50fb20 100644
+--- a/res/values-ja/strings.xml
++++ b/res/values-ja/strings.xml
+@@ -915,4 +915,26 @@
+     <string name="cstor_is_added" msgid="794788474010251572">"%sが追加されました。"</string>
+     <string name="emergency_tone_title" msgid="1055954530111587114">"緊急時の音"</string>
+     <string name="emergency_tone_summary" msgid="722259232924572153">"緊急通報時の動作を設定します"</string>
++    <!-- Ethernet configuration dialog -->
++<string name="eth_config_title">"有線LAN設定"</string>
++<string name="eth_setting">"有線LAN設定"</string>
++<string name="eth_dev_list">"有線LANインターフェース:"</string>
++<string name="eth_con_type">"IPアドレス設定方法"</string>
++<string name="eth_con_type_dhcp">"自動取得"</string>
++<string name="eth_con_type_manual">"手動設定"</string>
++<string name="eth_dns">"DNSサーバアドレス"</string>
++<string name="eth_gw">"デフォルトゲートウェイ"</string>
++<string name="eth_ipaddr">"IPアドレス"</string>
++<string name="eth_quick_toggle_title">"有線LAN"</string>
++<string name="eth_toggle_summary_on">"有線LANをONにする"</string>
++<string name="eth_conf_save">"保存"</string>
++<string name="eth_conf_cancel">"中止"</string>
++<string name="eth_radio_ctrl_title">"有線LAN設定"</string>
++<string name="eth_radio_ctrl_summary">"有線LANの設定をします"</string>
++<string name="eth_conf_perf_title">"有線LAN設定"</string>
++<string name="eth_conf_summary">"有線LANの設定をします"</string>
++<string name="eth_mask">"サブネットマスク"</string>
++<string name="eth_toggle_summary_off">"有線LANをOFFにする"</string>
++<string name="proxy_setting">"プロキシ設定"</string>
++<string name="proxy_setting_summary">"プロキシの設定をします"</string>
+ </resources>
+-- 
+1.6.3.3
+
