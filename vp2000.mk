@@ -5,22 +5,44 @@
 #
 
 PRODUCT_PACKAGES := \
-	framework-res \
-	Browser \
-	Launcher \
-	HTMLViewer \
-	ApplicationsProvider \
-	ContactsProvider \
-	DownloadProvider \
-	GoogleSearch \
-	SettingsProvider \
-	UserDictionaryProvider \
-	PackageInstaller \
-	Bugreport \
-	AlarmClock \
-	AlarmProvider \
-	LatinIME \
-	Settings \
+    framework-res \
+    Browser \
+    Contacts \
+    Launcher \
+    HTMLViewer \
+    Phone \
+    ApplicationsProvider \
+    ContactsProvider \
+    DownloadProvider \
+    GoogleSearch \
+    MediaProvider \
+    PicoTts \
+    SettingsProvider \
+    TelephonyProvider \
+    TtsService \
+    VpnServices \
+    UserDictionaryProvider \
+    PackageInstaller \
+    Bugreport \
+    AccountAndSyncSettings \
+    AlarmClock \
+    AlarmProvider \
+    Bluetooth \
+    Calculator \
+    Calendar \
+    Camera \
+    CertInstaller \
+    DrmProvider \
+    Email \
+    Gallery \
+    LatinIME \
+    Mms \
+    Music \
+    Settings \
+    Sync \
+    Updater \
+    CalendarProvider \
+    SyncProvider \
 	ConnectBot \
 	Email \
 	RSSReader \
@@ -40,14 +62,11 @@ PRODUCT_NAME := vp2000
 PRODUCT_DEVICE := vp2000
 PRODUCT_POLICY := android.policy_mid
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.secure=1 \
 	ro.com.android.dataroaming=true \
-	ro.product.locale.language=ja \
-	ro.product.locale.region=JP \
-	persist.sys.timezone=Asia/Tokyo
 
 ifeq ($(TARGET_PRODUCT),$(PRODUCT_NAME))
 TARGET_ARCH := x86
 DISABLE_DEXPREOPT := true
 CFLAGS := -march=geode -mtune=geode -mmmx -mno-sse -m3dnow -mfpmath=387 -funroll-loops -O2
+CXXFLAGS := -march=geode -mtune=geode -mmmx -mno-sse -m3dnow -mfpmath=387 -funroll-loops -O2
 endif

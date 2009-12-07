@@ -1,5 +1,5 @@
 # system.prop for vp2000
-ro.config.sync = yes
+ro.config.sync=yes
 app.setupwizard.disable=1
 keyguard.no_require_sim=1
 # default the paths and parameters for sys fs
