@@ -18,6 +18,7 @@ ro.sys.fs.power_supply.bat.feature.tech=/technology
 ro.power_supply.uevent.name.capacity.now=POWER_SUPPLY_CHARGE_NOW
 ro.power_supply.uevent.name.capacity.full=POWER_SUPPLY_CHARGE_FULL
 ro.alarm.volume.adjustable=true
+ro.simulated.phone=true
 #ro.sys.fs.power_supply.bat.features.bat.health is not supported
 #ro.sys.fs.power_supply.bat.features.bat.temperature is not supported
 # end system.prop for vp2000
