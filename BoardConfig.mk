@@ -1,5 +1,5 @@
 # These definitions override the defaults in config/config.make.
-TARGET_CPU_ABI := none
+TARGET_CPU_ABI := x86
 
 TARGET_COMPRESS_MODULE_SYMBOLS := false
 

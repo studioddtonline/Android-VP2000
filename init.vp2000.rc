@@ -1,5 +1,4 @@
 on boot
-    setprop ro.secure 1
     setprop ro.radio.use-ppp no
     setprop ro.radio.noril yes
     setprop status.battery.state Full
